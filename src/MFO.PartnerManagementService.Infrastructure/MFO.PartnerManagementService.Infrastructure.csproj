@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MFO.PartnerManagementService.Application\MFO.PartnerManagementService.Application.csproj" />
+  </ItemGroup>
+
 </Project>
