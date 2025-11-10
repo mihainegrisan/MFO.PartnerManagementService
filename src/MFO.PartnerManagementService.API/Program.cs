@@ -11,6 +11,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 builder.Services.AddScoped<IUserContextProvider, UserContextProvider>();
+builder.Services.AddDbContext<PartnerManagementDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PartnerManagementDbContext")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
