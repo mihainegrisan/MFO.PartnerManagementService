@@ -1,6 +1,8 @@
 using MFO.PartnerManagementService.Application.Interfaces;
 using MFO.PartnerManagementService.Application.Interfaces.Repositories;
+using MFO.PartnerManagementService.Infrastructure.Persistence;
 using MFO.PartnerManagementService.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
