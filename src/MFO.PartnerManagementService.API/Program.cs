@@ -1,3 +1,4 @@
+using MFO.PartnerManagementService.Application;
 using MFO.PartnerManagementService.Application.Interfaces;
 using MFO.PartnerManagementService.Application.Interfaces.Repositories;
 using MFO.PartnerManagementService.Infrastructure.Persistence;
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+
+builder.Services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
 
 builder.Services.AddControllers();
 
