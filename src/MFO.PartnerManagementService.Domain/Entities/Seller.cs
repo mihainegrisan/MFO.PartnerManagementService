@@ -9,8 +9,10 @@ namespace MFO.PartnerManagementService.Domain.Entities;
 /// </summary>
 public class Seller : AuditableEntity
 {
+    public required Guid PartnerId { get; set; }
+
     // Current operational status as a marketplace seller
-    public required SellerStatus SellerStatus { get; set; } = SellerStatus.Suspended; // Default to suspended until activated
+    public required SellerStatus SellerStatus { get; set; } = SellerStatus.InReview;
 
     // Links to the Logistics Hub service (e.g., a reference ID for their primary fulfillment location)
     public required Guid DefaultWarehouseId { get; set; }
@@ -22,6 +24,6 @@ public class Seller : AuditableEntity
     // Rating and review aggregation (could be a denormalized value from the Review & Rating Service)
     // public required decimal AverageRating { get; set; } = 0.0m;
 
-    public required Guid PartnerId { get; set; }
+
     public Partner? Partner { get; set; }
 }

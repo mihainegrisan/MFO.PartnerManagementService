@@ -29,4 +29,32 @@ public class PartnerManagementDbContext : AuditableDbContextBase
         ApplyAuditing();
         return base.SaveChangesAsync(cancellationToken);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Seller>(entity =>
+        {
+            // 1. Configure the primary key (equivalent to [Key])
+            entity.HasKey(e => e.PartnerId);
+
+            // 2. Prevent the database from generating the value (equivalent to [DatabaseGenerated(DatabaseGeneratedOption.None)])
+            entity.Property(e => e.PartnerId)
+                  .ValueGeneratedNever();
+
+            // Note: The 'required' keyword in C# 11+ is handled automatically by EF Core
+            // if the property is non-nullable (like Guid).
+        });
+
+        modelBuilder.Entity<Supplier>(entity =>
+        {
+            // 1. Configure the primary key (equivalent to [Key])
+            entity.HasKey(e => e.PartnerId);
+
+            // 2. Prevent the database from generating the value (equivalent to [DatabaseGenerated(DatabaseGeneratedOption.None)])
+            entity.Property(e => e.PartnerId)
+                  .ValueGeneratedNever();
+        });
+
+        base.OnModelCreating(modelBuilder);
+    }
 }
