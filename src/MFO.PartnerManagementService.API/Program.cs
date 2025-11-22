@@ -2,6 +2,7 @@ using MFO.PartnerManagementService.Application;
 using MFO.PartnerManagementService.Application.Interfaces;
 using MFO.PartnerManagementService.Application.Interfaces.Repositories;
 using MFO.PartnerManagementService.Infrastructure.Persistence;
+using MFO.PartnerManagementService.Infrastructure.Repositories;
 using MFO.PartnerManagementService.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -34,6 +35,7 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 builder.Services.AddScoped<IUserContextProvider, UserContextProvider>();
 builder.Services.AddDbContext<PartnerManagementDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PartnerManagementDbContext")));
+builder.Services.AddScoped<IPartnerQueryRepository, PartnerQueryRepository>();
 
 var app = builder.Build();
 
