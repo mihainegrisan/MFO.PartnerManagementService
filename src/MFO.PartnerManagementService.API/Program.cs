@@ -36,6 +36,7 @@ builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 builder.Services.AddScoped<IUserContextProvider, UserContextProvider>();
 builder.Services.AddDbContext<PartnerManagementDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PartnerManagementDbContext")));
 builder.Services.AddScoped<IPartnerQueryRepository, PartnerQueryRepository>();
+builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 
 var app = builder.Build();
 
