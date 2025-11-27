@@ -1,3 +1,4 @@
+using MFO.PartnerManagementService.API.Middlewares;
 using MFO.PartnerManagementService.Application;
 using MFO.PartnerManagementService.Application.Interfaces;
 using MFO.PartnerManagementService.Application.Interfaces.Repositories;
@@ -27,6 +28,13 @@ builder.Services.AddHealthChecks()
         new SqlConnectionHealthCheck(partnerManagementDbConnection),
         HealthStatus.Unhealthy,
         ["partnermanagementdb"]);
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly);
+    
+    cfg.AddOpenBehavior(typeof(ValidationMiddleware<,>));
+});
 
 builder.Services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
 
