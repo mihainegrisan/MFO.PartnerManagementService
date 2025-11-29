@@ -40,6 +40,8 @@ builder.Services.AddMediatR(cfg =>
 
 builder.Services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
 
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile(new PartnerManagementServiceProfile()));
+
 builder.Services.AddControllers();
 
 builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
