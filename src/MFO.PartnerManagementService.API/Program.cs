@@ -1,4 +1,5 @@
 using FluentValidation;
+using MFO.PartnerManagementService.API;
 using MFO.PartnerManagementService.API.Middlewares;
 using MFO.PartnerManagementService.Application;
 using MFO.PartnerManagementService.Application.Interfaces;
@@ -46,9 +47,33 @@ builder.Services.AddControllers();
 
 builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 builder.Services.AddScoped<IUserContextProvider, UserContextProvider>();
-builder.Services.AddDbContext<PartnerManagementDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PartnerManagementDbContext")));
+
 builder.Services.AddScoped<IPartnerQueryRepository, PartnerQueryRepository>();
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
+
+// Register ProducerConfig from configuration (so KafkaProducer can be constructed)
+builder.Services.AddSingleton<ProducerConfig>(sp =>
+{
+    var config = new ProducerConfig();
+    builder.Configuration.GetSection("Kafka:Producer").Bind(config);
+    return config;
+});
+
+builder.Services.AddSingleton<IKafkaProducer, KafkaProducer>();
+builder.Services.AddSingleton<IPartnerManagementPublisher, PartnerManagementPublisher>();
+
+builder.Services.AddDbContext<PartnerManagementDbContext>(options =>
+{
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("PartnerManagementDbContext"),
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 10,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        });
+});
 
 var app = builder.Build();
 
