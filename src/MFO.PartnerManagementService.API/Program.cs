@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using FluentValidation;
 using MFO.PartnerManagementService.API;
 using MFO.PartnerManagementService.API.Middlewares;
@@ -5,6 +6,7 @@ using MFO.PartnerManagementService.Application;
 using MFO.PartnerManagementService.Application.Interfaces;
 using MFO.PartnerManagementService.Application.Interfaces.Repositories;
 using MFO.PartnerManagementService.Application.Mapping;
+using MFO.PartnerManagementService.Infrastructure.Kafka;
 using MFO.PartnerManagementService.Infrastructure.Persistence;
 using MFO.PartnerManagementService.Infrastructure.Repositories;
 using MFO.PartnerManagementService.Infrastructure.Services;
