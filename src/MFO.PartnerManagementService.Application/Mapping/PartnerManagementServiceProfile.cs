@@ -25,5 +25,6 @@ public class PartnerManagementServiceProfile : Profile
         #endregion
 
 
+        CreateMap<CreateNewPartnerDto, Partner>();
     }
 }
