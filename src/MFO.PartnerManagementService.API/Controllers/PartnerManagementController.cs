@@ -1,6 +1,8 @@
 ﻿using FluentResults;
 using MediatR;
+using MFO.PartnerManagementService.Application.Features.Commands;
 using MFO.PartnerManagementService.Application.Features.Queries;
+using MFO.PartnerManagementService.Domain.Enums;
 using MFO.PartnerManagementService.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +17,26 @@ public class PartnerManagementController : ControllerBase
     public PartnerManagementController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+
+    /// <summary>
+    /// Synchronous API used by internal admin tools to set the operational status of a Seller. (COMMAND)
+    /// </summary>
+    [HttpPut("{partnerId}/status")]
+    public async Task<IActionResult> UpdateSellerStatus(
+        [FromRoute] Guid partnerId,
+        [FromBody] SellerStatus newStatus)
+    {
+        var command = new UpdateSellerStatusCommand(partnerId, newStatus);
+
+        var result = await _mediator.Send(command);
+
+        if (result.IsFailed)
+        {
+            return MapResultToActionResult(result);
+        }
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -44,10 +66,8 @@ public class PartnerManagementController : ControllerBase
     /// </summary>
     private IActionResult MapResultToActionResult<T>(Result<T> result)
     {
-        // Check for specific errors added in the handler
         if (result.HasError<NotFoundError>())
         {
-            // You can log the error here if needed
             return NotFound(new { errors = result.Errors.Select(e => e.Message) });
         }
 

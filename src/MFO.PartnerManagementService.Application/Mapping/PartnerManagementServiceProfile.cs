@@ -11,7 +11,7 @@ public class PartnerManagementServiceProfile : Profile
         #region Map Domain entities to DTOs
 
         CreateMap<Partner, PartnerDto>();
-        
+        CreateMap<Partner, PartnerValidationDetailsDto>();
         // CreateMap<Seller, SellerDto>();
         // CreateMap<Supplier, SupplierDto>();
 
