@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -18,6 +18,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFO.PartnerManagementService.UnitTests", "tests\MFO.PartnerManagementService.UnitTests\MFO.PartnerManagementService.UnitTests.csproj", "{BD6FCDBF-DF03-4015-80FA-0E7E890567E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFO.PartnerManagementService.IntegrationTests", "tests\MFO.PartnerManagementService.IntegrationTests\MFO.PartnerManagementService.IntegrationTests.csproj", "{5D2CECA0-3891-4AB8-B19C-E49018F4FA8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{DAC77EC7-E7AE-40FA-B49C-52FD0AD0506C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.github\workflows\build.yml = .github\workflows\build.yml
+		nuget.config = nuget.config
+		README.md = README.md
+		renovate.json = renovate.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,5 +122,8 @@ Global
 		{3411ED7D-776B-4BE5-B1F7-62E000434781} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{BD6FCDBF-DF03-4015-80FA-0E7E890567E0} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{5D2CECA0-3891-4AB8-B19C-E49018F4FA8D} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46E22D41-F787-478C-81F5-107B71BA4324}
 	EndGlobalSection
 EndGlobal
